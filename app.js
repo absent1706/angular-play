@@ -1,41 +1,42 @@
 (function() {
   var app = angular.module('gemStore', []);
 
-  app.controller('StoreController', function(){
+  app.controller('StoreController', function() {
     this.products = gems;
   });
 
-  app.controller('TabController', function(){
+  app.controller("TabController", function() {
     this.tab = 1;
 
-    this.setTab = function(newValue){
-      this.tab = newValue;
+    this.isSet = function(checkTab) {
+      return this.tab === checkTab;
     };
 
-    this.isSet = function(tabName){
-      return this.tab === tabName;
+    this.setTab = function(setTab) {
+      this.tab = setTab;
     };
   });
 
   app.controller('GalleryController', function(){
     this.current = 0;
-    this.setCurrent = function(newGallery){
-      this.current = newGallery || 0;
+
+    this.setCurrent = function(imageNumber){
+      this.current = imageNumber || 0;
     };
   });
 
-  app.controller('ReviewController', function(){
+  app.controller("ReviewController", function(){
+
     this.review = {};
 
-    this.addReview = function (product) {
-      product.reviews.push(this.review)
+    this.addReview = function(product){
+      this.review.createdOn = Date.now();
+      product.reviews.push(this.review);
       this.review = {};
-    }
+    };
   });
 
-
-  var gems = [
-    {
+  var gems = [{
       name: 'Azurite',
       description: "Some gems have hidden qualities beyond their luster, beyond their shine... Azurite is one of those gems.",
       shine: 8,
@@ -59,8 +60,7 @@
         author: "tim@example.org",
         createdOn: 1397490980837
       }]
-    },
-    {
+    }, {
       name: 'Bloodstone',
       description: "Origin of the Bloodstone is unknown, hence its low value. It has a very high shine and 12 sides, however.",
       shine: 9,
@@ -84,8 +84,7 @@
         author: "gemsRock@example.org",
         createdOn: 1397490980837
       }]
-    },
-    {
+    }, {
       name: 'Zircon',
       description: "Zircon is our most coveted and sought after gem. You will pay much to be the proud owner of this gorgeous and high shine gem.",
       shine: 70,
@@ -96,7 +95,7 @@
       images: [
         "http://lorempixel.com/100/100/food/6",
         "http://lorempixel.com/100/100/food/7",
-        "http://lorempixel.com/100/100/food/9"
+        "http://lorempixel.com/100/100/food/8"
       ],
       reviews: [{
         stars: 1,
@@ -114,6 +113,5 @@
         author: "nat@example.org",
         createdOn: 1397490980837
       }]
-    }
-  ];
+    }];
 })();
